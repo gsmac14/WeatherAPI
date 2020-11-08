@@ -1,6 +1,9 @@
 h1.card-header{
   text-align: center;
 }
+.navbar-text{
+  text-align: center;
+}
 .shadow-lg{
   width: 20%;
   float: left;

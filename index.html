@@ -14,13 +14,13 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="styles.css" />
-    <title>Document</title>
+    
+    <title>Weather Dashboard</title>
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <span class="navbar-brand mb-0 h1" style="align-content: center;"> Weather App</span>
-        
-    </nav>
+    <div class="container-fluid text-center text-light bg-dark">
+        <h1>Weather Dashboard</h1>
+    </div>
     <div class="container-fluid text-center">
         <div class="row" style="margin-top: 20px">
             <div class="col-md-12 card" style="padding: 30px">
@@ -33,7 +33,7 @@
                                 <button class= "chooseCity" type="submit"><i class="fa fa-search"></i></button>
                             </form>
                             <!--search history-->
-                            <form id="recentSearch" >
+                            <form id="recentSearch" class="mt-1" >
                                 <div>
                                     
                                 </div>
@@ -50,11 +50,6 @@
                             <!--5 day forcast-->
                             <div class="card-body" id="fiveDay">
                                 <h5>5-Day Forecast:</h5>
-                                <!-- <div class="card shadow-lg text-white bg-primary mx-auto mb-10 p-2" id= "5day" style="width: 8.5rem; height: 11rem;">
-                                    <h5 class="card-title setD"></h5>
-                                    <p class="card-text temp"></p>
-                                    <p class="card-text humidity"></p>
-                                </div> -->
 
                             </div>
                         </div>
