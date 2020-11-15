@@ -14,9 +14,9 @@ $(document).ready(function () {
       $("#current").empty();
       var currentDate = moment().format("L");
 
-      //added some HTML to show weaather in city
+      //added some HTML to show weather in city
       var cityNameEl = $("<h2>").text(response.name);
-      var showDate = cityNameEl.append("" + currentDate);
+      var showDate = cityNameEl.append("  " + currentDate);
       var tempEl = $("<p>").text("Temprature: " + response.main.temp);
       var humidEl = $("<p>").text("Humidity: " + response.main.humidity);
       var windSpeedEl = $("<p>").text("Wind Speed: " + response.wind.speed);
@@ -28,7 +28,6 @@ $(document).ready(function () {
 
       //New div for current weather
       var newDiv = $("<div>");
-      var uvlEl;
       newDiv.append(showDate, img, tempEl, humidEl, windSpeedEl);
       $("#current").html(newDiv);
 
@@ -50,19 +49,18 @@ $(document).ready(function () {
         uvEl = $("<p>").text("UV Index:" + uvResults);
 
         newDiv.append(uvEl);
-        if (uvResults <= 2) {
+        if (uvResults <= 2.9) {
           uvEl.attr("style", "background-color:green" );
           }
-        else if (uvResults  >= 3 || uvEl <= 5 ) {
+        if (uvResults  >= 3 && uvResults <= 5.9 ) {
             uvEl.attr("style", "background-color:yellow" );
           } 
-        else if (uvResults  >= 6 || uvEl <= 7 ) {
-            uvEl.attr("style", "background-color:orange" )
+        if (uvResults  >= 6 && uvResults <= 7.9 ) {
+            uvEl.attr("style", "background-color:orange" );
            } 
-        else {
-            uvEl.attr("style", "background-color:red" )
+        if(uvResults >= 8)  {
+            uvEl.attr("style", "background-color:red" );
            } 
-          
       });
     });
 
@@ -86,20 +84,22 @@ $(document).ready(function () {
         $("#fiveDay").append(fiveForcast);
         var dayContent = $("<div>").addClass("card-body");
         fiveForcast.append(dayContent);
+        // var img = $("<img>").attr( "src", "http://openweathermap.org/img/w/" + response.weather[0].icon + ".png");
 
         var date = response.list[i].dt_txt;
-        var setDate = date.substr(0, 5);
+        var setDate = date.substr(0, 10);
+        
         var temp = response.list[i].main.temp;
         var hum = response.list[i].main.humidity;
         var fiveH = $("<h5>").text(setDate).addClass("card-title setD");
         var fiveP = $("<p>").text("Temp: " + temp).addClass("card-text temp");
         var fiveP2 = $("<p>").text("Humidity " + hum).addClass("card-text humidity");
-
         fiveForcast.addClass(
-          "card shadow-lg text-white bg-primary mx-auto mb-10 p-2"
+          "card shadow-lg text-white bg-primary mx-2 mb-5 p-2"
         );
 
         dayContent.append(fiveH);
+        // dayContent.append(img);
         dayContent.append(fiveP);
         dayContent.append(fiveP2);
 
@@ -111,24 +111,22 @@ $(document).ready(function () {
   load();
   $(".chooseCity").on("click", function (event) {
     event.preventDefault();
-    var cityInput = $("#cityInput").val().trim();
+    var cityEntered = $("#cityInput").val().trim();
     var textCon = $(this).siblings("#cityInput").val();
-    var storageArr = [];
-    storageArr.push(textCon);
-    localStorage.setItem("cityName", JSON.stringify(storageArr));
-    citySearch(cityInput);
+    var arr = [];
+    arr.push(textCon);
+    localStorage.setItem("cityName", JSON.stringify(arr));
+    citySearch(cityEntered);
     load();
   });
 
   function load() {
     var recentSearch = JSON.parse(localStorage.getItem("cityName"));
     var li = $("<li>");
-    var psearch = $("<button>");
-
+    var previousSearch = $("<button>").attr("style", "background-color: white");
     var ul = $("<ul>").attr("style", "list-style: none;");
-    var clearBtn = $("<button>");
     $("#recentSearch").prepend(
-      ul.append(li.append(psearch.append(recentSearch)))
+      ul.append(li.append(previousSearch.append(recentSearch)))
     );
   }
   $("#recentSearch").on("click", "button", function (event) {
