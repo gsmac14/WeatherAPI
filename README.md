@@ -1,4 +1,4 @@
-# README
+# Weather Dashboard
   
   ## Table of Contents
   * [Description](#description)
