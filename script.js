@@ -49,6 +49,7 @@ $(document).ready(function () {
         uvEl = $("<p>").text("UV Index:" + uvResults);
 
         newDiv.append(uvEl);
+        //if statement to change uv index color when index increases past a certain point
         if (uvResults <= 2.9) {
           uvEl.attr("style", "background-color:green" );
           }
@@ -84,7 +85,7 @@ $(document).ready(function () {
         $("#fiveDay").append(fiveForcast);
         var dayContent = $("<div>").addClass("card-body");
         fiveForcast.append(dayContent);
-        // var img = $("<img>").attr( "src", "http://openweathermap.org/img/w/" + response.weather[0].icon + ".png");
+        // var img = $("<img>").attr( "src", "http://openweathermap.org/img/w/" + response.list.weather[2].icon + ".png");
 
         var date = response.list[i].dt_txt;
         var setDate = date.substr(0, 10);
@@ -95,7 +96,7 @@ $(document).ready(function () {
         var fiveP = $("<p>").text("Temp: " + temp).addClass("card-text temp");
         var fiveP2 = $("<p>").text("Humidity " + hum).addClass("card-text humidity");
         fiveForcast.addClass(
-          "card shadow-lg text-white bg-primary mx-2 mb-5 p-2"
+          "card shadow-lg text-white bg-primary mx-1 mb-5 p-2"
         );
 
         dayContent.append(fiveH);
